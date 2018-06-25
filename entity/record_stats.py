@@ -9,6 +9,7 @@ class RecordStats:
         self.volume_day = None
         self._get_record_by_text(text, *args)
         self._remove_commas_from_value()
+        self._round_to_last_price()
 
     def _get_record_by_text(self, text, *args):
         for arg in args[0]:
@@ -18,3 +19,8 @@ class RecordStats:
 
     def _remove_commas_from_value(self):
         [self.__setattr__(key, value.replace(',', '')) for key, value in self.__dict__.items() if ',' in value]
+
+    def _round_to_last_price(self):
+        self.last_price = float(self.last_price)
+        self.last_price = round(self.last_price, 1)
+        self.last_price = str(self.last_price)
